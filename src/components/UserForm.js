@@ -1,8 +1,14 @@
 import React from "react";
 import {Form,} from "semantic-ui-react";
+import {UserConsumer,} from "../providers/UserProvider";
 
 class UserForm extends React.Component{
-  state ={ email:"", firstName:"", lastName:"", avatar:"",}
+  state ={ 
+    email: this.props.email, 
+    firstName: this.props.firstName, 
+    lastName: this.props.lastName, 
+    avatar: this.props.avatar,
+  }
 
   handleChange =(e, {name,value}) => this.setState({[name]:value,})
 
@@ -11,9 +17,9 @@ class UserForm extends React.Component{
   }
 
   render(){
-    const {email,firstName,lastName,avatar,} = this.state;
-  
+    const {email,firstName,lastName,avatar} = this.state
     return (
+  
       < Form onSubmit ={this.handleSubmit}>
       < Form.Input
         label="email"
@@ -48,6 +54,24 @@ class UserForm extends React.Component{
     )
   }
 }
+    const ConnectedUserForm =(props) => {
+      return (
+        <UserConsumer>
+        { value => (
+          <UserForm 
+            { ...props }
+            email={value.email}
+            firstName={value.firstName}
+            lastName={value.lastName}
+            avatar ={value.avatar}
+            updateUser ={value.updateUser}
+          />
+        )}
+      </UserConsumer>
+      )
+  }
+  
+
 
 const avatarOptions = [
   {key :"b",text: "Apple",value: "Apple",},
@@ -56,4 +80,4 @@ const avatarOptions = [
 
 ]
 
-export default UserForm;
+export default ConnectedUserForm;

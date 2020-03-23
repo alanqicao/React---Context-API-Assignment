@@ -1,24 +1,27 @@
-import React from "react";
+import React, {userContext,} from "react";
 import {Card,} from "semantic-ui-react";
-import {UserConsumer,} from "../providers/UserProvider"
+import {UserContext,} from "../providers/UserProvider"
 
-const User =()=>(
-  <UserConsumer>
-    {value => (
+const User =()=>{
+  const user = userContext(UserContext);
+
+  return (
+   
   <Card>
     <Card.Content>
-      <Card.Header>{value.firstName}</Card.Header>
+      <Card.Header>{user.firstName}</Card.Header>
       <Card.Meta>
-        Date Joined: {value.dateJoined}
+        Date Joined: {user.dateJoined}
       </Card.Meta>
     </Card.Content>
     <Card.Content>
-      <p>User Avatar:{value.avatar}</p>
+      <p>User Avatar:{user.avatar}</p>
     </Card.Content>
   </Card>
-  )}
-  </UserConsumer>
-)
+  
+  
+  );
+};
 
 export default User;
 

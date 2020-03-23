@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserContext = React.createContext();
+export const UserContext = React.createContext();
 
 export const UserConsumer = UserContext.Consumer;
 
@@ -11,6 +11,11 @@ class UserProvider extends React.Component {
     lastName:"lastFoo66",
     avatar :"Apple",
     dateJoined:"12/18/2019",
+    updateUser:(user) => this.updateUser(user)
+  }
+
+  updateUser =(user)=>{
+    this.setState({...user,});
   }
 
   render(){
